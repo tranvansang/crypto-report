@@ -1,2 +1,56 @@
 \chapter{ISBN}
-Content
+\section{Introduction}
+International Standard Book Number (ISBN) is an unique 13 digits long number assigned to a book. Affiliates of International ISBN Agency have ability to release a number whenever being requested by publisher. The last digit is the hash of 10 preceding digits. In other words,
+
+$$
+ISBN = m_{13}, m_{12}, m_{11}, \ldots, m_1
+$$
+$$
+m_1 = isbn(m_{13}, m_{12}, m_{11}, \ldots, m_2)
+$$
+Whether
+$$
+isbn(m_{13}, m_{12}, m_{11}, \ldots, m_2) = \sum_{i \equiv 1 \pmod{2}, 2\leq i \leq 13} m_i + 3 \times \sum_{i \equiv 0 \pmod(2), 2\leq i \leq 13 }m_i
+$$
+
+\section{Detection ability}
+Using ISBN system, one can detect one digit changed or 2 consecutive digits swapped unless that those numbers' difference is 5 (i.e. swapping numbers are one of (0, 5), (1, 6), (2, 7), (3, 8), or (4, 9))\\
+
+To check if there is any modification on the received ISBN number, one can check by calculating checksum $C = \sum_{i \equiv 1 \pmod{2}, 2\leq i \leq 13} m_i + 3 \times \sum_{i \equiv 0 \pmod{2}, 2\leq i \leq 13 }m_i - m_1 \mod 10$ equal to 0.\\
+
+\section{Proof}
+\subsection{Single digit modification}
+We will prove with this method 2 kinds of modification mentioned above can be detected.\\
+Assume that ith number is changed to $m'_i$ while other numbers keep the same. Absolute of difference between new sum and old sum is
+
+$$
+|C - C'| \mod 10 =
+\begin{cases}
+|m_i - m'_i| \mod 10 &\text{if} i \equiv 1 \pmod{2}
+\\
+ 3 \times |m_i - m'_i| \mod 10 &\text{otherwise}
+\end{cases}
+$$
+
+Because $GCD(3, 10) = 0$, $|C-C'| \mod 10 \ne 0$
+\subsection{Consecutive swapping}
+If 2 digits $m_i$ and $m_{i+1}$ are swapped, and $|m_i-m_{i+1}| \neq 5$\\
+Similar to previous subsection
+\begin{equation}
+\begin{split}
+|C - C'| \mod 10 & =
+\begin{cases}
+|m_i + 3 \times m_{i+1} - 3 \times m_i - \times m_{i+1}| \mod 10 &\text{if} i \equiv 1 \pmod{2}
+\\
+ |3 \times m_i + m_{i+1} - m_i - 3 \times m_{i+1}| \mod 10 &\text{otherwise}
+\end{cases}
+\\
+& = 2 \times |m_i - m_{i+1}|
+\end{split}
+\end{equation}
+
+Thus, $|C-C'| \mod 10 \neq 0$
+
+\subsection{Generalization}
+The ISBN checksum is one special case of the hash function $H(m) = \sum_{i \geq 2}a_im_i \mod 10$ where $a_i(i \geq 2)$ are fixed\\
+In the following chapter we will discuss on other form of checksum with better error detection ability.

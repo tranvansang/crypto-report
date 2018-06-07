@@ -1,2 +1,9 @@
 \chapter{Hash function}
-Hash function blah
+Hash function is a class of function that takes input of arbitrary length, called message, and outputs of fixed length, called hash. Hash function has important role in cryptography and many applications due to its one-wayness. Hash function ability to resist cryptanalytic attack is mainly determined by 3 properties
+\begin{itemize}
+    \item Pre-image resistance. Sometime referred as one-wayness. Given a hash value $h$, it should be infeasible within acceptable time to find original domain value $m$ such that the hash function maps $m$ into $h$.
+    \item Second pre-image resistance. It should be infeasible within acceptable time to find another input m’ that has same image mapped by the hash function, given input m.
+    \item Collision resistance. It should be infeasible within acceptable time to find 2 input messages m, m’ such that the hash function maps them into same hash.
+\end{itemize}
+
+It is obvious that pre-image resistance hash function is also pre-image resistance. Similarly, functions that resist collision also have second pre-image resistance property.
