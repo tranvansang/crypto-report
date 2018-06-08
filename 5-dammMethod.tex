@@ -1,0 +1,48 @@
+\chapter{Damm's method}
+
+Damm's method is check digit algorithm based on 
+\emph{quasigroup}.
+It can detect all single-digit errors and all adjacent transposition errors.
+
+\section{Quasigroup}
+
+\emph{Quasigroup} $(Q,*)$ is a set $Q$ with a binary operation ``$*$''
+such that  \emph{ Latin square property} holds:
+for every $a,b \in Q$, there exists unique $x$ and $y$ satisfy the following.
+\begin{align*}
+ a*x = b\\
+ y*a = b
+\end{align*}
+
+Let us consider a \emph{Cayley table} of the operation ``$*$''.
+Latin square property can be characterize by whether 
+the table is \emph{Latin square}:
+each element occurs exactly once in each row and exactly once in each column.
+For example, the operation expressed by the following table
+satisfies Latin square property.
+\begin{center}
+\begin{tabular}{| l || l | l | l |}
+\hline
+$*$& 0 & 1 & 2\\
+\hline\hline
+0   & 0 & 1 & 2\\
+\hline
+1   & 1 & 2 & 0 \\
+\hline
+1   & 2 & 0 & 1 \\
+\hline
+\end{tabular}
+ \end{center}
+
+The following lemma is derived immediately,
+which is significant for error detection  of 
+damm's method.
+\begin{lemma}
+ Suppose $(Q,*)$ is quasigroup.
+ For arbitrary $x,x'$ and $a$ in $Q$, the following hold.
+\begin{align*}
+ x \neq x'\; \rightarrow a*x \neq a*x' \\
+ x \neq x'\; \rightarrow x*a \neq x'*a
+ \end{align*}
+\end{lemma}
+
