@@ -40,9 +40,97 @@ damm's method.
 \begin{lemma}
  Suppose $(Q,*)$ is quasigroup.
  For arbitrary $x,x'$ and $a$ in $Q$, the following hold.
-\begin{align*}
- x \neq x'\; \rightarrow a*x \neq a*x' \\
- x \neq x'\; \rightarrow x*a \neq x'*a
- \end{align*}
+\begin{align}
+ x \neq x'\; \Rightarrow a*x \neq a*x' \label{eq:lem1}\\
+ x \neq x'\; \Rightarrow x*a \neq x'*a \label{eq:lem2}
+ \end{align}
 \end{lemma}
+
+
+
+\section{Damm's method}
+
+This algorithm is based on quasigroup $(Q,*)$
+of 10-order with a special property:
+for all $c,x,y \in Q$ the followings hold.
+\begin{align}
+ &(c*x)*y = (c*y)*x \;\Rightarrow x = y \label{eq:antiSym1}\\
+&x*x = 0
+\end{align}
+The example of such a quasigroup is shown in Figure~\ref{fig:10digitsQuasi}.
+
+\begin{figure}[htb]
+ \begin{center}
+\begin{tabular}{| l || l | l | l | l | l | l | l | l | l | l |}
+ \hline
+* & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9\\
+\hline\hline
+0 & 0 & 3 & 1 & 7 & 5 & 9 & 8 & 6 & 4 & 2\\
+\hline
+1 & 7 & 0 & 9 & 2 & 1 & 5 & 4 & 8 & 6 & 3\\
+\hline
+2 & 4 & 2 & 0 & 6 & 8 & 7 & 1 & 3 & 5 & 9\\
+\hline
+3 & 1 & 7 & 5 & 0 & 9 & 8 & 3 & 4 & 2 & 6\\
+\hline
+4 & 6 & 1 & 2 & 3 & 0 & 4 & 5 & 9 & 7 & 8\\
+\hline
+5 & 3 & 6 & 7 & 4 & 2 & 0 & 9 & 5 & 8 & 1\\
+\hline
+6 & 5 & 8 & 6 & 9 & 7 & 2 & 0 & 1 & 3 & 4\\
+\hline
+7 & 8 & 9 & 4 & 5 & 3 & 6 & 2 & 0 & 1 & 7\\
+\hline
+8 & 9 & 4 & 3 & 8 & 6 & 1 & 7 & 2 & 0 & 5\\
+\hline
+9 & 2 & 5 & 8 & 1 & 4 & 3 & 6 & 7 & 9 & 0\\
+\hline
+\end{tabular}
+ \end{center}
+\caption{Example:Quasigroup for damm's method}
+\label{fig:10digitsQuasi}
+\end{figure}
+The validity of a digit sequence $m_1 m_2 ... m_n$ is judged by whether
+$(...((0*m_1)*m_2)*...*m_n) = 0 $ holds.
+
+This method can detect all single-digit
+ errors and all adjacent transposition errors.
+The proof is as follow.
+We denote $k_i^{m}$ as $(...(0*m_1)*...*m_i)$.
+\begin{itemize}
+ \item \underline{single-digit errors }
+
+       Suppose digit sequences $m$ and $m'$ are same except for i'th element:
+       $m_i \neq m'_i$.
+       \begin{align*}
+	k_i^{m} &= k_{i-1}^{m} * m_i \\
+	k_i^{m'} &= k_{i-1}^{m} * m'_i 
+       \end{align*}
+       From the implication~\ref{eq:lem1},
+       $$k_i^{m} \neq k_i^{m'}$$ 
+       is derived.
+       \begin{align*}
+	k_{i+1}^{m} &= k_i^{m} * m_i \\
+	k_{i+1}^{m'} &= k_i^{m} * m'_i 
+       \end{align*}
+       From the implication~\ref{eq:lem2},
+       $$k_{i+1}^{m} \neq k_{i+1}^{m'}$$
+       Therefore, inductively,
+       $$k_{n}^{m'} \neq k_{n}^{m} = 0$$
+
+ \item \underline{ adjacent transposition errors}
+
+       Suppose a digit sequence $m'$ is a result of
+       swapping $m_i$ and $m_{i+1}$ in a sequence $m$.
+       Here, we assume $m_i \neq m_{i+1}$.
+       \begin{align*}
+	k_{i+1}^{m} &= (k_{i-1}^{m}* m_i) * m_{i+1} \\
+	k_{i+1}^{m'} &= (k_{i-1}^{m}* m_{i+1}) * m_i
+       \end{align*}
+       From (\ref{eq:antiSym1}),
+       $$k_{i+1}^{m} \neq k_{i+1}^{m'}$$ 
+       is derived.
+       Hence, same as the  case \underline{single-digit errors },
+       $$k_{n}^{m'} \neq k_{n}^{m} = 0$$
+\end{itemize}
 
