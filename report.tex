@@ -3,6 +3,7 @@
 \usepackage{amsmath}
 \usepackage{theorem}
 \usepackage{macro}
+\usepackage{minted}
 
 \begin{document}
 \title{Cryptography midterm report}
@@ -11,8 +12,8 @@ Eguchi Shingo, Department of Computer Science, 48-186016}
 \maketitle
 \tableofcontents
 
-\chapter{Topic}
-We presented basic checksum algorithms such as the one used in credit card numbers. Explain what is a quasigroup. Present and analyze Damm’s method based on quasigroups to detect all single-digit and transposition errors. Are there other quasigroups that work ?
+\chapter*{Topic}
+We presented basic checksum algorithms such as the one used in credit card numbers (Chapter 3). Explain what is a quasigroup (Section 4.1). Present and analyze Damm’s method based on quasigroups to detect all single-digit and transposition errors (Section 4.2). Are there other quasigroups that work? (Section 4.3)
 
 \input{1-Hash.tex}
 \input{2-ISBN.tex}
@@ -20,5 +21,5 @@ We presented basic checksum algorithms such as the one used in credit card numbe
 % \input{4-DihedralGroup.tex}
 % \input{5-Quasigroup.tex}
 \input{5-dammMethod.tex}
-\input{6-Summary.tex}
+%\input{6-Summary.tex}
 \end{document}

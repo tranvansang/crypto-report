@@ -19,3 +19,7 @@
     + Detection ablity **to detect all single-digit and transposition errors.**
     + Proof
     + Generalization **Are there other quasigroups that work ?**
+
+# How to compile
+
+`pdflatex -shell-escape report.tex`

@@ -14,12 +14,12 @@ isbn(m_{13}, m_{12}, m_{11}, \ldots, m_2) = \sum_{i \equiv 1 \pmod{2}, 2\leq i \
 $$
 
 \section{Detection ability}
-Using ISBN system, one can detect one digit changed or 2 consecutive digits swapped unless that those numbers' difference is 5 (i.e. swapping numbers are one of (0, 5), (1, 6), (2, 7), (3, 8), or (4, 9))\\
+Using ISBN system, one can detect all single-digit errors and adjacent transposition errors unless that those numbers' difference is 5 (i.e. swapping numbers are one of (0, 5), (1, 6), (2, 7), (3, 8), or (4, 9))\\
 
 To check if there is any modification on the received ISBN number, one can check by calculating checksum $C = \sum_{i \equiv 1 \pmod{2}, 2\leq i \leq 13} m_i + 3 \times \sum_{i \equiv 0 \pmod{2}, 2\leq i \leq 13 }m_i - m_1 \mod 10$ equal to 0.\\
 
 \section{Proof}
-\subsection{Single digit modification}
+\subsection{Single digit error}
 We will prove with this method 2 kinds of modification mentioned above can be detected.\\
 Assume that ith number is changed to $m'_i$ while other numbers keep the same. Absolute of difference between new sum and old sum is
 
@@ -33,7 +33,7 @@ $$
 $$
 
 Because $GCD(3, 10) = 0$, $|C-C'| \mod 10 \ne 0$
-\subsection{Consecutive swapping}
+\subsection{Adjacent transposition error}
 If 2 digits $m_i$ and $m_{i+1}$ are swapped, and $|m_i-m_{i+1}| \neq 5$\\
 Similar to previous subsection
 \begin{equation}
@@ -51,6 +51,6 @@ Similar to previous subsection
 
 Thus, $|C-C'| \mod 10 \neq 0$
 
-\subsection{Generalization}
+\section{Generalization}
 The ISBN checksum is one special case of the hash function $H(m) = \sum_{i \geq 2}a_im_i \mod 10$ where $a_i(i \geq 2)$ are fixed\\
 In the following chapter we will discuss on other form of checksum with better error detection ability.
